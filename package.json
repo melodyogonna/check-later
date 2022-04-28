@@ -19,13 +19,16 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js"
+    "typeorm": "ts-node --transpile-only ./node_modules/typeorm/cli.js",
+    "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migrate:undo": "ts-node ./node_modules/typeorm/cli.js migration:undo"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",
     "@nestjs/core": "^7.6.15",
     "@nestjs/platform-express": "^7.6.15",
     "@nestjs/typeorm": "^8.0.3",
+    "dotenv": "^16.0.0",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",

@@ -6,7 +6,7 @@ import {
   DeleteDateColumn,
 } from "typeorm";
 
-Entity();
+@Entity()
 export default class Users {
   @PrimaryGeneratedColumn()
   id: number;

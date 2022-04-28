@@ -1,3 +1,5 @@
+import "dotenv/config";
+
 export default {
   type: "mysql",
   host: process.env.DB_HOST,
