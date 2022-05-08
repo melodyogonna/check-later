@@ -19,8 +19,8 @@ export class MainService {
     return this.itemsRepository.find();
   }
 
-  async getItem(id: number) {
-    return this.itemsRepository.findOne(id);
+  async getItem(uuid: string) {
+    return this.itemsRepository.findOne({ where: { uuid } });
   }
 
   async updateItem(id: number, item: Items) {
