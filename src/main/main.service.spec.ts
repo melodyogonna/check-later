@@ -37,7 +37,9 @@ describe("MainService", () => {
   it("should return an item", async () => {
     const item = { url: "a url", date: "a date", uuid: "djjjdke1334" };
     mockItemRepository.findOne.mockReturnValue(item);
-    expect(service.getItem(item.uuid)).toEqual(item);
-    expect(mockItemRepository.findOne).toHaveBeenCalledWith(item.uuid);
+    expect(await service.getItem(item.uuid)).toEqual(item);
+    expect(mockItemRepository.findOne).toHaveBeenCalledWith({
+      where: { uuid: item.uuid },
+    });
   });
 });
