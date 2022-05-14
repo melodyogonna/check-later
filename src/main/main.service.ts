@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import Items from "../models/items.entity";
+import { CreateItemDto } from "./dto/items.dto";
 
 @Injectable()
 export class MainService {
@@ -11,8 +12,15 @@ export class MainService {
     private readonly itemsRepository: Repository<Items>
   ) {}
 
-  async createItem(item: Items) {
-    return this.itemsRepository.save(item);
+  async createItem(item: CreateItemDto): Promise<Items> {
+    const user = await this.getItem(item.userId);
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return this.itemsRepository.save({
+      ...item,
+      user,
+    });
   }
 
   async getItems() {

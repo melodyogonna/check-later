@@ -13,6 +13,8 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   rules: {
     "import/extensions": "off",
+    "lines-between-class-members": "off",
+    "import/prefer-default-export": "off",
   },
   settings: {
     "import/resolver": {
