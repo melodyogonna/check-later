@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
@@ -17,9 +17,12 @@ export class MainService {
   ) {}
 
   async createItem(item: CreateItemDto): Promise<Items> {
-    const user = await this.userRepository.findOne(item.user);
+    const user = await this.userRepository.findOne({
+      uuid: item.user,
+    });
+    console.log(user);
     if (!user) {
-      throw new Error("User not found");
+      throw new HttpException("User not found", HttpStatus.BAD_REQUEST);
     }
     const newItem = await this.itemsRepository.save({
       ...item,

@@ -6,6 +6,8 @@ import {
   Generated,
   ManyToOne,
   DeleteDateColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 import User from "./users.entity";
@@ -27,6 +29,7 @@ export default class Items {
 
   @Column({
     type: "text",
+    default: null,
   })
   description: string;
 
@@ -44,4 +47,10 @@ export default class Items {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @CreateDateColumn()
+  createAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

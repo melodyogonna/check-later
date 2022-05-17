@@ -4,6 +4,8 @@ import {
   Column,
   Generated,
   DeleteDateColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
 @Entity()
@@ -35,4 +37,10 @@ export default class Users {
 
   @DeleteDateColumn()
   deletedAt?: Date;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }
