@@ -15,6 +15,7 @@ module.exports = {
     "import/extensions": "off",
     "lines-between-class-members": "off",
     "import/prefer-default-export": "off",
+    "no-useless-constructor": "off",
   },
   settings: {
     "import/resolver": {

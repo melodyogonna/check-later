@@ -3,24 +3,30 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
 import Items from "../models/items.entity";
+import User from "../models/users.entity";
+
 import { CreateItemDto } from "./dto/items.dto";
 
 @Injectable()
 export class MainService {
   constructor(
     @InjectRepository(Items)
-    private readonly itemsRepository: Repository<Items>
+    private readonly itemsRepository: Repository<Items>,
+    @InjectRepository(User)
+    private readonly userRepository: Repository<User>
   ) {}
 
   async createItem(item: CreateItemDto): Promise<Items> {
-    const user = await this.getItem(item.userId);
+    const user = await this.userRepository.findOne(item.user);
     if (!user) {
       throw new Error("User not found");
     }
-    return this.itemsRepository.save({
+    const newItem = await this.itemsRepository.save({
       ...item,
       user,
     });
+
+    return newItem;
   }
 
   async getItems() {

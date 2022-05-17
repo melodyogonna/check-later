@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Put, Body, UsePipes } from "@nestjs/common";
 
 import { MainService } from "./main.service";
-import { CreateItemsDto } from "./dto/items.dto";
+import { CreateItemDto } from "./dto/items.dto";
 import { JoiValidationPipe } from "../pipes/joiValidationPipe";
-import { itemsSchema, ItemsSchema } from "./validations/itemsSchema";
+import { itemsSchema } from "./validations/itemsSchema";
 
 @Controller("items")
 export class MainController {
@@ -14,14 +14,14 @@ export class MainController {
     return this.mainService.getItems();
   }
 
-  @Get("/:id")
-  getItem(id: number) {
-    return this.mainService.getItem(id);
+  @Get("/:uuid")
+  getItem(uuid: string) {
+    return this.mainService.getItem(uuid);
   }
 
   @Post()
   @UsePipes(new JoiValidationPipe(itemsSchema))
-  createItem(@Body() item: CreateItemsDto) {
+  createItem(@Body() item: CreateItemDto) {
     return this.mainService.createItem(item);
   }
 }
