@@ -75,7 +75,10 @@ describe("MainService", () => {
         user: "a user",
       };
       mockUserRepository.findOne.mockReturnValue(null);
-      expect(await service.createItem(item)).toThrow(EntityNotFoundError);
+      const newItem = await service.createItem(item);
+      expect(newItem).toMatch(
+        'User "a user" not found. Please create a user first.'
+      );
     });
   });
 });
