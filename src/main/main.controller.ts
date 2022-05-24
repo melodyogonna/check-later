@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Put, Body, UsePipes } from "@nestjs/common";
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Body,
+  UsePipes,
+  UseInterceptors,
+} from "@nestjs/common";
 
 import { MainService } from "./main.service";
 import { CreateItemDto } from "./dto/items.dto";
 import { JoiValidationPipe } from "../pipes/joiValidationPipe";
 import { itemsSchema } from "./validations/itemsSchema";
+import { ErrorsInterceptor } from "../shared/errors/interceptors";
 
 @Controller("items")
+@UseInterceptors(ErrorsInterceptor)
 export class MainController {
   constructor(private readonly mainService: MainService) {}
 

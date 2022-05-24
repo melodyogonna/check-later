@@ -1,10 +1,10 @@
-import { Injectable, HttpException, HttpStatus } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { EntityNotFoundError } from "../shared/errors/errors";
 import Items from "../models/items.entity";
 import User from "../models/users.entity";
-
 import { CreateItemDto } from "./dto/items.dto";
 
 @Injectable()
@@ -20,9 +20,8 @@ export class MainService {
     const user = await this.userRepository.findOne({
       uuid: item.user,
     });
-    console.log(user);
     if (!user) {
-      throw new HttpException("User not found", HttpStatus.BAD_REQUEST);
+      throw new EntityNotFoundError("User not found");
     }
     const newItem = await this.itemsRepository.save({
       ...item,
