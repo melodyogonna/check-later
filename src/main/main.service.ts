@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { add } from "date-fns";
 
 import { EntityNotFoundError } from "../shared/errors/errors";
 import Items from "../models/items.entity";
@@ -23,9 +24,11 @@ export class MainService {
     if (!user) {
       throw new EntityNotFoundError("User not found");
     }
+    const dueDate = add(new Date(), { hours: 6 });
     const newItem = await this.itemsRepository.save({
       ...item,
       user,
+      dueDate,
     });
 
     return newItem;
