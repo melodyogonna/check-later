@@ -1,8 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { MainController } from "./main.controller";
 import { MainService } from "./main.service";
-
-type MockType<T> = { [P in keyof T]?: jest.Mock<{}> };
+import { MockType } from "../shared/tests/types";
 
 const MockServiceFactory = jest.fn(() => ({
   createItem: jest.fn(),

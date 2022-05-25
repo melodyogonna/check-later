@@ -7,8 +7,7 @@ import { MainService } from "./main.service";
 import ItemsEntity from "../models/items.entity";
 import UserEntity from "../models/users.entity";
 import { EntityNotFoundError } from "../shared/errors/errors";
-
-type MockType<T> = { [P in keyof T]?: jest.Mock<{}> };
+import { MockType } from "../shared/tests/types";
 
 const mockRepoFactory: () => MockType<Repository<any>> = jest.fn(() => ({
   findOne: jest.fn((entity) => entity),
